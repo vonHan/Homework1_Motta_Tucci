@@ -8,44 +8,57 @@ package it.uniroma3.sdr.model;
 
 public class Complex {
 	
-	private double parteRe;
-	private double parteImm;
+	private double parteReale;
+	private double parteImmaginaria;
 	
+	public Complex() {
+	}
 	
 	public Complex(double parteRe, double parteImm) {
 		super();
-		this.parteImm = parteImm;
-		this.parteRe = parteRe;
+		this.parteImmaginaria = parteImm;
+		this.parteReale = parteRe;
 	}
 
 	
 	/*---- GETTERS & SETTERS ----*/
 	
-	public double getParteImm() {
-		return parteImm;
+	public double getParteImmaginaria() {
+		return parteImmaginaria;
 	}
 
 	
-	public double getParteRe() {
-		return parteRe;
+	public double getParteReale() {
+		return parteReale;
 	}
 	
+	public void setParteReale(double parteReale) {
+		this.parteReale = parteReale;
+	}
+
+
+	public void setParteImmaginaria(double parteImmaginaria) {
+		this.parteImmaginaria = parteImmaginaria;
+	}
 	
 	/*--- OPERAZIONI DI BASE TRA NUMERI COMPLESSI ----*/
 	
+
+
+
 	public Complex sum(Complex that){
-		return new Complex(this.getParteRe()+that.getParteRe(), this.getParteImm()+that.getParteImm());
+		return new Complex(this.getParteReale()+that.getParteReale(), this.getParteImmaginaria()+that.getParteImmaginaria());
 	}
 	
 	
 	public Complex diff(Complex that){
-		return new Complex(this.getParteRe()-that.getParteRe(), this.getParteImm()-that.getParteImm());
+		return new Complex(this.getParteReale()-that.getParteReale(), this.getParteImmaginaria()-that.getParteImmaginaria());
 	}
 	
 	
 	public Complex mult(Complex that){
-		double parteRe=this.getParteRe()*that.getParteRe() - this.getParteImm()*that.getParteImm();
-		double parteImm=this.getParteRe()*that.getParteImm() + this.getParteImm()*that.getParteRe();
+		double parteRe=this.getParteReale()*that.getParteReale() - this.getParteImmaginaria()*that.getParteImmaginaria();
+		double parteImm=this.getParteReale()*that.getParteImmaginaria() + this.getParteImmaginaria()*that.getParteReale();
 				
 		return new Complex(parteRe, parteImm);
 	}
@@ -53,20 +66,20 @@ public class Complex {
 	
 	
 	public Complex div(Complex that){
-		double parteRe = (this.getParteRe()*that.getParteRe() + this.getParteImm()*that.getParteImm()) / (Math.pow(that.getParteRe(), 2) + Math.pow(that.getParteImm(), 2));
-		double parteImm = (this.getParteImm()*that.getParteRe() - this.getParteRe()*that.getParteImm()) / (Math.pow(that.getParteRe(), 2) + Math.pow(that.getParteImm(), 2));
+		double parteRe = (this.getParteReale()*that.getParteReale() + this.getParteImmaginaria()*that.getParteImmaginaria()) / (Math.pow(that.getParteReale(), 2) + Math.pow(that.getParteImmaginaria(), 2));
+		double parteImm = (this.getParteImmaginaria()*that.getParteReale() - this.getParteReale()*that.getParteImmaginaria()) / (Math.pow(that.getParteReale(), 2) + Math.pow(that.getParteImmaginaria(), 2));
 		
 		return new Complex(parteRe, parteImm);
 	}
 	
 	
 	public Complex coniugato(){
-		return new Complex(this.parteRe, - this.parteImm);
+		return new Complex(this.parteReale, - this.parteImmaginaria);
 	}
 	
 	
 	public double abs(){
-		return Math.sqrt(Math.pow(this.parteRe,2) + Math.pow(this.parteImm,2));
+		return Math.sqrt(Math.pow(this.parteReale,2) + Math.pow(this.parteImmaginaria,2));
 	}
 
 	/*---- HASHCODE. TOSTRING, EQUAL ----*/
@@ -76,9 +89,9 @@ public class Complex {
 		final int prime = 31;
 		int result = 1;
 		long temp;
-		temp = Double.doubleToLongBits(parteImm);
+		temp = Double.doubleToLongBits(parteImmaginaria);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(parteRe);
+		temp = Double.doubleToLongBits(parteReale);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -93,11 +106,11 @@ public class Complex {
 		if (getClass() != obj.getClass())
 			return false;
 		Complex other = (Complex) obj;
-		if (Double.doubleToLongBits(parteImm) != Double
-				.doubleToLongBits(other.parteImm))
+		if (Double.doubleToLongBits(parteImmaginaria) != Double
+				.doubleToLongBits(other.parteImmaginaria))
 			return false;
-		if (Double.doubleToLongBits(parteRe) != Double
-				.doubleToLongBits(other.parteRe))
+		if (Double.doubleToLongBits(parteReale) != Double
+				.doubleToLongBits(other.parteReale))
 			return false;
 		return true;
 	}
@@ -105,7 +118,7 @@ public class Complex {
 
 	@Override
 	public String toString() {
-		return "Complex [parteRe=" + parteRe + ", parteImm=" + parteImm + "]";
+		return "Complex [parteRe=" + parteReale + ", parteImm=" + parteImmaginaria + "]";
 	}
 	
 		
