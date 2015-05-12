@@ -1,1 +1,10 @@
+/build/
 /bin/
+*.class
+.project
+.metadata
+.settings/
+.classpath
+target/
+local.properties
+.loadpath
