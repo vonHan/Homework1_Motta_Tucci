@@ -28,7 +28,7 @@ public abstract class AbstractSignal {
 	 * calcola l'energia del segnale in questione
 	 * @return
 	 */
-	public double energySignal() {
+	public double getEnergy() {
 	double result = 0;
 	for(int i = 0; i < this.getLength(); i++) {
 		result += Math.pow(this.values.get(i).getParteReale(), 2) + 

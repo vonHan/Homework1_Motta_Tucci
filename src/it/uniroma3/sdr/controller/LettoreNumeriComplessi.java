@@ -48,7 +48,8 @@ public class LettoreNumeriComplessi {
 	public static void main(String[] args){
 		LettoreNumeriComplessi lettore = new LettoreNumeriComplessi();
 		try{
-			List<Complex> values = lettore.leggiNumeriComplessi("/Users/luke1993/Documents/workspace/Homework1_Motta_Tucci/sequenze/Sequenza_1/output_1.dat");
+			List<Complex> values = lettore.leggiNumeriComplessi("/Users/luke1993/Documents"
+					+ "/workspace/Homework1_Motta_Tucci/sequenze/Sequenza_1/output_1.dat");
 
 			for(Complex element : values)
 				System.out.println(element.toString());

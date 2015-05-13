@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 // TODO nome da decidere together
-public class SampleGenerator {
+public class Statistics {
 
 	/**
 	 * metodo che restituisce una lista di energie relative ad
@@ -26,29 +26,11 @@ public class SampleGenerator {
 		Noise noise = null;
 		for(int i = 0; i < numberOfNoises; i++){
 			noise = new Noise(snr, length);
-			energies.add(noise.energySignal());
+			energies.add(noise.getEnergy());
 		}
 		return energies;
 	}
 
-	/**
-	 * calcola la soglia
-	 * @param probabilityFalseAlarm
-	 * @param snr
-	 * @return
-	 */
-	public double treshold(List<Double> energies) {
-		double probabilityFalseAlarm = 0.001;
-		double valoreMedio = this.valoreMedio(energies);
-		double treshold = 0;
-		double varianza = this.varianza(energies);
-		try {
-			treshold =  valoreMedio + (Math.sqrt(2 * varianza) * this.InvErf(1 - 2 * probabilityFalseAlarm));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return treshold;
-	}
 
 	/**
 	 * calcola il <strong>Valore Medio</strong> (o <strong>Valore Atteso</strong>) delle energie in input
