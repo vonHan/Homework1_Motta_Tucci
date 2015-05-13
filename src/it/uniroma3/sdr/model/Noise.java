@@ -2,7 +2,6 @@ package it.uniroma3.sdr.model;
 
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -62,32 +61,13 @@ public class Noise extends AbstractSignal {
 		this.pot_rumore = pot_rumore;
 	}
 
-	public double energyNoise() {
-		double result = 0;
-		for(int i = 0; i < this.length; i++) {
-			result += Math.pow(this.signal.get(i).getParteReale(), 2) + 
-					Math.pow(this.signal.get(i).getParteImmaginaria(), 2);
-		}
-		return result / length;		
-	}
-
-	
-	/**metodo che restituisce una lista di energie relative ad
-	 * un numero di rumori <strong>numberOfNoises</strong> nelle quali viene generato di
-	 * volta in volta un nuovo rumore con parametri <strong>snr</strong> e <strong>length</strong>
-	 * @param numberOfNoises
-	 * @param snr
-	 * @param length
-	 * @return
-	 */
-	public List<Double> energiesNoiseSamples(int numberOfNoises, int snr, int length){
-		List<Double> energies = new LinkedList<Double>();
-		Noise noise = null;
-		for(int i = 0; i < numberOfNoises; i++){
-			noise = new Noise(snr, length);
-			energies.add(noise.energyNoise());
-		}
-		return energies;
-	}
+//	public double energyNoise() {
+//		double result = 0;
+//		for(int i = 0; i < this.length; i++) {
+//			result += Math.pow(this.signal.get(i).getParteReale(), 2) + 
+//					Math.pow(this.signal.get(i).getParteImmaginaria(), 2);
+//		}
+//		return result / length;		
+//	}
 
 }

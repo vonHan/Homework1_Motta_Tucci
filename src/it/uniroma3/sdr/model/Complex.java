@@ -14,10 +14,10 @@ public class Complex {
 	public Complex() {
 	}
 	
-	public Complex(double parteRe, double parteImm) {
+	public Complex(double parteReale, double parteImmaginaria) {
 		super();
-		this.parteImmaginaria = parteImm;
-		this.parteReale = parteRe;
+		this.parteReale = parteReale;
+		this.parteImmaginaria = parteImmaginaria;
 	}
 
 	

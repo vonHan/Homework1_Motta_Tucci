@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class AbstractSignal {
 	
-	private int length;
+//	private int length;
 	private List<Complex> values;
 	
 	public AbstractSignal(){
@@ -24,14 +24,22 @@ public abstract class AbstractSignal {
 		this.values.addAll(values);
 	}
 	
-
+	/**
+	 * calcola l'energia del segnale in questione
+	 * @return
+	 */
+	public double energySignal() {
+	double result = 0;
+	for(int i = 0; i < this.getLength(); i++) {
+		result += Math.pow(this.values.get(i).getParteReale(), 2) + 
+				Math.pow(this.values.get(i).getParteImmaginaria(), 2);
+	}
+	return result / this.getLength();		
+}
+	
 	/* getters & setters */
 	public int getLength() {
-		return length;
-	}
-
-	public void setLength(int length) {
-		this.length = length;
+		return this.values.size();
 	}
 
 	public List<Complex> getValues() {
