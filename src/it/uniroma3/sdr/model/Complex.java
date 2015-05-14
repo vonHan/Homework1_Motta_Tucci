@@ -81,6 +81,14 @@ public class Complex {
 	public double abs(){
 		return Math.sqrt(Math.pow(this.parteReale,2) + Math.pow(this.parteImmaginaria,2));
 	}
+	
+	/**
+	 * Restituisce il modulo quadro di questo numero complesso
+	 * @return double
+	 */
+	public double absSquare(){
+		return Math.pow(this.parteReale,2) + Math.pow(this.parteImmaginaria,2);
+	}
 
 	/*---- HASHCODE. TOSTRING, EQUAL ----*/
 
