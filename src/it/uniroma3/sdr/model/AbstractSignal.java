@@ -19,7 +19,7 @@ public abstract class AbstractSignal {
 		this.values = new LinkedList<Complex>();
 	}
 	
-	public AbstractSignal(LinkedList<Complex> values){
+	public AbstractSignal(List<Complex> values){
 		this();
 		this.values.addAll(values);
 	}
@@ -29,13 +29,14 @@ public abstract class AbstractSignal {
 	 * @return
 	 */
 	public double getEnergy() {
-	double result = 0;
-	for(int i = 0; i < this.getLength(); i++) {
-		result += Math.pow(this.values.get(i).getParteReale(), 2) + 
-				Math.pow(this.values.get(i).getParteImmaginaria(), 2);
+		double result = 0;
+		
+		for(Complex sample : this.values){
+			result += sample.absSquare();
+		}
+		
+		return result / this.values.size();		
 	}
-	return result / this.getLength();		
-}
 	
 	/* getters & setters */
 	public int getLength() {

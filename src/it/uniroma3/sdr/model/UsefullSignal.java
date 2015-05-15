@@ -1,6 +1,7 @@
 package it.uniroma3.sdr.model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class UsefullSignal extends AbstractSignal {
 	
@@ -8,7 +9,7 @@ public class UsefullSignal extends AbstractSignal {
 	public UsefullSignal(){
 	}
 	
-	public UsefullSignal(LinkedList<Complex> values) {
+	public UsefullSignal(List<Complex> values) {
 		super(values);
 	}
 		

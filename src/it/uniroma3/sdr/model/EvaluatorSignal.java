@@ -1,9 +1,33 @@
 package it.uniroma3.sdr.model;
-import it.uniroma3.sdr.controller.LettoreNumeriComplessi;
+import it.uniroma3.sdr.controller.ComplexNumbersReader;
+import it.uniroma3.sdr.controller.Statistics;
 
 import java.util.*;
 public class EvaluatorSignal {
 
+	
+	/**
+	 * calcola la soglia
+	 * @param probabilityFalseAlarm
+	 * @param snr
+	 * @return
+	 */
+	public double treshold(List<Double> energies) {
+		Statistics statistics = new Statistics();
+		double probabilityFalseAlarm = 0.001;
+		double valoreMedio = statistics.valoreMedio(energies);
+		double treshold = 0;
+		double varianza = statistics.varianza(energies);
+
+		try {
+			treshold =  valoreMedio + (Math.sqrt(2 * varianza) * statistics.InvErf(1 - 2 * probabilityFalseAlarm));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return treshold;
+	}
+	
+	
 	/**
 	 * riceve un <strong>signal</strong> in input e se possibile lo partiziona in
 	 * segnali della dimensione <strong>sizePartition</strong>
@@ -65,6 +89,7 @@ public class EvaluatorSignal {
 		for(int i = 0; i < energiesSize; i++){
 			if(energies.get(i) > treshold)
 				counter++;
+
 		}
 
 		return  (counter / energies.size()) * 100;
@@ -73,33 +98,50 @@ public class EvaluatorSignal {
 	
 	/**
 	 * Calcola l'SNR Signal-to-Noise Ratio di un segnale
+	 * in decibel
 	 * 
 	 * @return double SNR
 	 */
-	public double calculateSNR(List<Complex> sequenceValues){
-		double energieTotal = 0;
-
-		for(Complex sample: sequenceValues){
-			energieTotal = sample.absSquare() + energieTotal;
+	public double calculateSNR(AbstractSignal signal){
+		return 1/(signal.getEnergy()-1);
+	}
+	
+	
+	/**
+	 * metodo che restituisce una lista di energie relative ad
+	 * un numero di rumori <strong>numberOfNoises</strong> nelle quali viene generato di
+	 * volta in volta un nuovo rumore con parametri <strong>snr</strong> e <strong>length</strong>
+	 * @param numberOfNoises
+	 * @param snr
+	 * @param length
+	 * 		   
+	 */
+	public List<Double> energiesNoiseSamples(int numberOfNoises, double snr, int length){
+		List<Double> energies = new LinkedList<Double>();
+		NoiseSignal noise = null;
+		
+		for(int i = 0; i < numberOfNoises; i++){
+			noise = new NoiseSignal(snr, length);
+			energies.add(new Double(noise.getEnergy()));
 		}
-
-		return 1/(energieTotal -1);
+		return energies;
 	}
 	
 	public static void main(String[] args){
 		try{
-			LettoreNumeriComplessi lettoreNumeriComplessi = new LettoreNumeriComplessi();
-			String path = "/Users/luke1993/Documents"
-					+ "/workspace/Homework1_Motta_Tucci/sequenze/output_1.dat";
+			ComplexNumbersReader lettoreNumeriComplessi = new ComplexNumbersReader();
+			String path = null;
 			
 			EvaluatorSignal evaluatorSignal = new EvaluatorSignal();
 			List<Complex> sequenceValues = null;
+			UsefullSignal signalTemp = null;
 			
 			for(int i=1; i<13; i++){
 				path = "/Users/luke1993/Documents"
 						+ "/workspace/Homework1_Motta_Tucci/sequenze/output_"+i+".dat";
-				sequenceValues = lettoreNumeriComplessi.leggiNumeriComplessi(path);
-				System.out.println(evaluatorSignal.calculateSNR(sequenceValues));
+				sequenceValues = lettoreNumeriComplessi.execute(path);
+				signalTemp = new UsefullSignal(sequenceValues);
+				System.out.println(evaluatorSignal.calculateSNR(signalTemp));
 			}
 			
 		}catch(Exception e){

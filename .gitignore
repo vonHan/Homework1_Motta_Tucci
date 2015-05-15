@@ -9,3 +9,4 @@ target/
 local.properties
 .loadpath
 .dat
+.DS_Store

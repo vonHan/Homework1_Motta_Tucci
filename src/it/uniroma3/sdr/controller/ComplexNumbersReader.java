@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class LettoreNumeriComplessi {
+public class ComplexNumbersReader {
 
 	/**
 	 * Legge i numeri complessi nel file associato al 
@@ -18,7 +18,7 @@ public class LettoreNumeriComplessi {
 	 * @return Lista di numeri complessi
 	 * @throws IOException
 	 */
-	public List<Complex> leggiNumeriComplessi(String path) throws IOException{
+	public List<Complex> execute(String path) throws IOException{
 		try{
 			FileReader reader = new FileReader(path);
 			Scanner scanner = new Scanner(reader);
@@ -46,9 +46,9 @@ public class LettoreNumeriComplessi {
 	
 
 	public static void main(String[] args){
-		LettoreNumeriComplessi lettore = new LettoreNumeriComplessi();
+		ComplexNumbersReader lettore = new ComplexNumbersReader();
 		try{
-			List<Complex> values = lettore.leggiNumeriComplessi("/Users/luke1993/Documents"
+			List<Complex> values = lettore.execute("/Users/luke1993/Documents"
 					+ "/workspace/Homework1_Motta_Tucci/sequenze/Sequenza_1/output_1.dat");
 
 			for(Complex element : values)
