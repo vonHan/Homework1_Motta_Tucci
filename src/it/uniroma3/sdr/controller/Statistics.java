@@ -13,30 +13,33 @@ public class Statistics {
 
 	/**
 	 * calcola il <strong>Valore Medio</strong> (o <strong>Valore Atteso</strong>) delle energie in input
-	 * @param energies
+	 * @param values
 	 * @return
 	 */
-	public double valoreMedio(List<Double> energies) {
-		double sommaParziale = 0;
-		for(int i = 0; i < energies.size(); i++) {
-			sommaParziale = sommaParziale + energies.get(i);
-		}
-		return sommaParziale / energies.size();
+	public double valoreMedio(List<Double> values) {
+		double sommaParziale = 0.0;
+		
+		for(Double element : values)
+			sommaParziale += element;
+		
+		return sommaParziale/values.size();
 	}
 
 	/**
 	 * calcola la <strong>Varianza</strong> delle energie in input
-	 * @param energies
+	 * @param values
 	 * @return
 	 */
 	//TODO si può introdurre una qualche dipendenza tra l'input
 	//di valoreMedio e l'input di varianza?
-	public double varianza(List<Double> energies) {
-		double valoreMedio = this.valoreMedio(energies);
-		double sommaParziale = 0;
-		for(int i = 0; i < energies.size(); i++)
-			sommaParziale += Math.pow(energies.get(i) - valoreMedio, 2);
-		return sommaParziale / energies.size();
+	public double varianza(List<Double> values) {
+		double valoreMedio = this.valoreMedio(values);
+		double sommaParziale = 0.0;
+		
+		for(Double element: values)
+			sommaParziale += Math.pow(valoreMedio - element, 2);
+		
+		return sommaParziale / values.size();
 	}
 
 	/**

@@ -37,10 +37,9 @@ public class EvaluatorSignal {
 	 * 			di <strong>signal</strong>, caso in cui la dimensione di signal non sia un
 	 * 			multiplo di sizePartition ritornerà <strong>null</strong>
 	 */
-	public List<UsefullSignal> partitionedSignal(UsefullSignal signal, int sizePartition){
+	public List<UsefullSignal> partitionedSignal(AbstractSignal signal, int sizePartition){
 		List<UsefullSignal> partionedSignal = new LinkedList<UsefullSignal>();
 		List<Complex> signalValues = signal.getValues();
-		
 		if(signalValues.size() % sizePartition != 0)
 			return null;
 		
@@ -48,7 +47,7 @@ public class EvaluatorSignal {
 		UsefullSignal partitionTemp = new UsefullSignal(sizePartition);
 
 		for(Complex element : signalValues) {
-			if(counter == sizePartition - 1){
+			if(counter == sizePartition){
 				partionedSignal.add(partitionTemp);
 				partitionTemp = new UsefullSignal(sizePartition);
 				counter=0;
@@ -67,8 +66,11 @@ public class EvaluatorSignal {
 	 */
 	public List<Double> getEnergiesFromPartitionedSignal(List<UsefullSignal> partitionedSignalValues) {
 		List<Double> energies = new ArrayList<Double>(partitionedSignalValues.size());
-		for(UsefullSignal element : partitionedSignalValues)
+		for(UsefullSignal element : partitionedSignalValues){
 			energies.add(element.getEnergy());
+			System.out.println("Energy i: "+ element.getEnergy());
+		}
+
 		return energies;
 	}
 
@@ -81,7 +83,7 @@ public class EvaluatorSignal {
 	 * @param sizePartition
 	 * @return
 	 */
-	public double calculateProbabilityDetection(double treshold, UsefullSignal signal, int sizePartition){
+	public double calculateProbabilityDetection(double treshold, AbstractSignal signal, int sizePartition){
 		List<Double> energies = this.getEnergiesFromPartitionedSignal(this.partitionedSignal(signal, sizePartition));
 		int counter = 0;
 		int energiesSize = energies.size();
@@ -89,10 +91,8 @@ public class EvaluatorSignal {
 		for(int i = 0; i < energiesSize; i++){
 			if(energies.get(i) > treshold)
 				counter++;
-
 		}
-
-		return  (counter / energies.size()) * 100;
+		return (counter/energiesSize)*100;
 	}
 	
 	
@@ -103,7 +103,7 @@ public class EvaluatorSignal {
 	 * @return double SNR
 	 */
 	public double calculateSNR(AbstractSignal signal){
-		return 1/(signal.getEnergy()-1);
+		return 10*Math.log10(1/(signal.getEnergy()-1));
 	}
 	
 	
