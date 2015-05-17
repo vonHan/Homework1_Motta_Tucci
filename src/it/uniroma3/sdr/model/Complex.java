@@ -86,7 +86,7 @@ public class Complex {
 	 * Restituisce il modulo quadro di questo numero complesso
 	 * @return double
 	 */
-	public double absSquare(){
+	public double absPow(){
 		return Math.pow(this.parteReale,2) + Math.pow(this.parteImmaginaria,2);
 	}
 

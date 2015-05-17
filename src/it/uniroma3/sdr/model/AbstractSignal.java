@@ -32,7 +32,7 @@ public abstract class AbstractSignal {
 		double result = 0;
 		
 		for(Complex sample : this.values){
-			result += sample.absSquare();
+			result += sample.absPow();
 		}
 		
 		return result / this.values.size();		

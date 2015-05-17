@@ -4,7 +4,6 @@ import it.uniroma3.sdr.model.AbstractSignal;
 import it.uniroma3.sdr.model.Complex;
 import it.uniroma3.sdr.model.EvaluatorSignal;
 import it.uniroma3.sdr.model.UsefullSignal;
-
 import java.util.List;
 
 
@@ -31,7 +30,7 @@ public class Main {
 				signal = new UsefullSignal(signalValues);
 				snr = evaluatorSignal.calculateSNR(signal);
 				
-				energiesNoisesList = evaluatorSignal.energiesNoiseSamples(1000, snr, 10000);
+				energiesNoisesList = evaluatorSignal.makeEnergiesNoises(1000, snr, 10000);
 				treshold = evaluatorSignal.treshold(energiesNoisesList);
 				
 				probabilityDetection = evaluatorSignal.calculateProbabilityDetection(treshold, signal, 1000);
@@ -41,8 +40,6 @@ public class Main {
 				System.out.println("-soglia: "+treshold);
 				System.out.println("-probabilita' di detection: "+probabilityDetection+"%\n");
 			}
-			
-			
 			
 		}catch(Exception e){
 			e.printStackTrace();

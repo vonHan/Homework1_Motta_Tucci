@@ -6,7 +6,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
 
-// TODO nome da decidere together
 public class Statistics {
 
 
@@ -37,7 +36,7 @@ public class Statistics {
 		double sommaParziale = 0.0;
 		
 		for(Double element: values)
-			sommaParziale += Math.pow(valoreMedio - element, 2);
+			sommaParziale += Math.pow(element - valoreMedio, 2);
 		
 		return sommaParziale / values.size();
 	}

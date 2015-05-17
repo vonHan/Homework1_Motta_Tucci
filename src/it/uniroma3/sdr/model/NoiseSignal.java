@@ -9,7 +9,9 @@ public class NoiseSignal extends AbstractSignal {
 	private int length;
 	private double pot_rumore;
 
-	public NoiseSignal() {}
+	public NoiseSignal() {
+		super();
+	}
 
 	public NoiseSignal(double snr, int length){
 		Random campione = null;

@@ -1,42 +1,42 @@
 package it.uniroma3.sdr.model;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class UsefullSignal extends AbstractSignal {
 	
 
 	public UsefullSignal(){
+		super();
 	}
 	
 	public UsefullSignal(List<Complex> values) {
 		super(values);
 	}
 		
-	/**
-	 * da finire questo Costruttore
-	 * @param length
-	 */
-	public UsefullSignal (int length) {
-		super.setValues(new LinkedList<Complex>());
-		for(int i = 0; i < length; i++) {
-			Complex complex = new Complex();
-			double v = Math.random();
-			
-			if(v < 0.5)
-				complex.setParteReale(1 / Math.sqrt(2));
-			else
-				complex.setParteReale(- 1 / Math.sqrt(2));
-			double p = Math.random();
-			
-			if(p < 0.5)
-				complex.setParteImmaginaria(1 / Math.sqrt(2));
-			else
-				complex.setParteImmaginaria(- 1 / Math.sqrt(2));
-			super.getValues().add(complex);
-		}
-	}
-	
+//	/**
+//	 * da finire questo Costruttore
+//	 * @param length
+//	 */
+//	public UsefullSignal (int length) {
+//		super.setValues(new LinkedList<Complex>());
+//		for(int i = 0; i < length; i++) {
+//			Complex complex = new Complex();
+//			double v = Math.random();
+//			
+//			if(v < 0.5)
+//				complex.setParteReale(1 / Math.sqrt(2));
+//			else
+//				complex.setParteReale(- 1 / Math.sqrt(2));
+//			double p = Math.random();
+//			
+//			if(p < 0.5)
+//				complex.setParteImmaginaria(1 / Math.sqrt(2));
+//			else
+//				complex.setParteImmaginaria(- 1 / Math.sqrt(2));
+//			super.getValues().add(complex);
+//		}
+//	}
+//	
 	
 	
 	
