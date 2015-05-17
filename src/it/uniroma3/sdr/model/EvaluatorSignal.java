@@ -95,7 +95,7 @@ public class EvaluatorSignal {
 			if(energies.get(i) > treshold)
 				counter++;
 		}
-		return (counter/energiesSize)*100;
+		return ((double)counter/(double)energiesSize)*100;
 	}
 	
 	
