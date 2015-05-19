@@ -4,8 +4,10 @@
  * @version 0.0
  */
 
-package it.uniroma3.sdr.model;
+package it.uniroma3.sdr.model.signal;
 
+
+import it.uniroma3.sdr.model.Complex;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,15 +1,17 @@
-package it.uniroma3.sdr.model;
+package it.uniroma3.sdr.model.signal;
+
+import it.uniroma3.sdr.model.Complex;
 
 import java.util.List;
 
-public class UsefullSignal extends AbstractSignal {
+public class GenericSignal extends AbstractSignal {
 	
 
-	public UsefullSignal(){
+	public GenericSignal(){
 		super();
 	}
 	
-	public UsefullSignal(List<Complex> values) {
+	public GenericSignal(List<Complex> values) {
 		super(values);
 	}
 		
@@ -42,7 +44,7 @@ public class UsefullSignal extends AbstractSignal {
 	
 	@Override
 	public boolean equals(Object o){
-		UsefullSignal s = (UsefullSignal)o;
+		GenericSignal s = (GenericSignal)o;
 		boolean b = true;
 		if(super.getValues().size() != s.getLength())
 			return false;

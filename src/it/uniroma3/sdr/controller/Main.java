@@ -1,9 +1,10 @@
 package it.uniroma3.sdr.controller;
 
-import it.uniroma3.sdr.model.AbstractSignal;
 import it.uniroma3.sdr.model.Complex;
 import it.uniroma3.sdr.model.EvaluatorSignal;
-import it.uniroma3.sdr.model.UsefullSignal;
+import it.uniroma3.sdr.model.signal.AbstractSignal;
+import it.uniroma3.sdr.model.signal.GenericSignal;
+
 import java.util.List;
 
 
@@ -24,10 +25,10 @@ public class Main {
 			double probabilityDetection;
 			
 			for(int i=1; i<13; i++){
-				path = "/Users/luke1993/Documents/workspace/Homework1_Motta_Tucci/sequenze/output_"+i+".dat";
+				path = "sequenze/output_"+i+".dat";
 				signalValues= complexNumbersReader.execute(path);
 				
-				signal = new UsefullSignal(signalValues);
+				signal = new GenericSignal(signalValues);
 				snr = evaluatorSignal.calculateSNR(signal);
 				
 				energiesNoisesList = evaluatorSignal.makeEnergiesNoises(1000, snr, 10000);

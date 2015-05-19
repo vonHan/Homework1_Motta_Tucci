@@ -2,6 +2,10 @@ package it.uniroma3.sdr.model;
 
 import it.uniroma3.sdr.controller.ComplexNumbersReader;
 import it.uniroma3.sdr.controller.Statistics;
+import it.uniroma3.sdr.model.signal.AbstractSignal;
+import it.uniroma3.sdr.model.signal.NoiseSignal;
+import it.uniroma3.sdr.model.signal.GenericSignal;
+
 import java.util.*;
 
 public class EvaluatorSignal {	
@@ -36,8 +40,8 @@ public class EvaluatorSignal {
 	 * 			di <strong>signal</strong>, caso in cui la dimensione di signal non sia un
 	 * 			multiplo di sizePartition ritornerà <strong>null</strong>
 	 */
-	public List<UsefullSignal> partitionSignal(AbstractSignal signal, int sizePartition){
-		List<UsefullSignal> partionedSignal = new LinkedList<UsefullSignal>();
+	public List<GenericSignal> partitionSignal(AbstractSignal signal, int sizePartition){
+		List<GenericSignal> partionedSignal = new LinkedList<GenericSignal>();
 		List<Complex> signalValues = signal.getValues();
 		
 		if(signalValues.size() % sizePartition != 0)
@@ -45,12 +49,12 @@ public class EvaluatorSignal {
 		
 		int counter = 0;
 		
-		UsefullSignal partitionTemp = new UsefullSignal();
+		GenericSignal partitionTemp = new GenericSignal();
 
 		for(Complex element : signalValues) {
 			if(counter == sizePartition){
 				partionedSignal.add(partitionTemp);
-				partitionTemp = new UsefullSignal();
+				partitionTemp = new GenericSignal();
 				counter=0;
 			}
 			partitionTemp.getValues().add(element);
@@ -67,9 +71,9 @@ public class EvaluatorSignal {
 	 * @param partitionedSignalValues
 	 * @return
 	 */
-	public List<Double> getEnergiesFromPartitionedSignal(List<UsefullSignal> partitionedSignalValues) {
+	public List<Double> getEnergiesFromPartitionedSignal(List<GenericSignal> partitionedSignalValues) {
 		List<Double> energies = new ArrayList<Double>(partitionedSignalValues.size());
-		for(UsefullSignal element : partitionedSignalValues)
+		for(GenericSignal element : partitionedSignalValues)
 			energies.add(element.getEnergy());
 
 		return energies;
@@ -85,7 +89,7 @@ public class EvaluatorSignal {
 	 * @return
 	 */
 	public double calculateProbabilityDetection(double treshold, AbstractSignal signal, int sizePartition){
-		List<UsefullSignal> signalPartions = this.partitionSignal(signal, sizePartition);
+		List<GenericSignal> signalPartions = this.partitionSignal(signal, sizePartition);
 		List<Double> energies = this.getEnergiesFromPartitionedSignal(signalPartions);
 		
 		int counter = 0;
@@ -137,13 +141,13 @@ public class EvaluatorSignal {
 			
 			EvaluatorSignal evaluatorSignal = new EvaluatorSignal();
 			List<Complex> sequenceValues = null;
-			UsefullSignal signalTemp = null;
+			GenericSignal signalTemp = null;
 			
 			for(int i=1; i<13; i++){
 				path = "/Users/luke1993/Documents"
 						+ "/workspace/Homework1_Motta_Tucci/sequenze/output_"+i+".dat";
 				sequenceValues = lettoreNumeriComplessi.execute(path);
-				signalTemp = new UsefullSignal(sequenceValues);
+				signalTemp = new GenericSignal(sequenceValues);
 				System.out.println(evaluatorSignal.calculateSNR(signalTemp));
 			}
 			

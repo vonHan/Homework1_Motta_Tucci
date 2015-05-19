@@ -29,8 +29,6 @@ public class Statistics {
 	 * @param values
 	 * @return
 	 */
-	//TODO si può introdurre una qualche dipendenza tra l'input
-	//di valoreMedio e l'input di varianza?
 	public double varianza(List<Double> values) {
 		double valoreMedio = this.valoreMedio(values);
 		double sommaParziale = 0.0;
@@ -107,8 +105,6 @@ public class Statistics {
 				BigDecimal den = new BigDecimal(new BigInteger(A092677[i]), 50);
 
 				BigDecimal coeff = num.divide(den, RoundingMode.HALF_UP);
-
-				//System.out.println(coeff);
 
 				BigDecimal xBD = x.pow(i*2+1, MathContext.UNLIMITED);           
 
