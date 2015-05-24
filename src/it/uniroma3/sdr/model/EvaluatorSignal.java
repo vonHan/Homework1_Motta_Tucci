@@ -1,6 +1,5 @@
 package it.uniroma3.sdr.model;
 
-import it.uniroma3.sdr.controller.ComplexNumbersReader;
 import it.uniroma3.sdr.controller.Statistics;
 import it.uniroma3.sdr.model.signal.AbstractSignal;
 import it.uniroma3.sdr.model.signal.NoiseSignal;
@@ -132,28 +131,5 @@ public class EvaluatorSignal {
 			energies.add(new Double(noise.getEnergy()));
 		}
 		return energies;
-	}
-	
-	public static void main(String[] args){
-		try{
-			ComplexNumbersReader lettoreNumeriComplessi = new ComplexNumbersReader();
-			String path = null;
-			
-			EvaluatorSignal evaluatorSignal = new EvaluatorSignal();
-			List<Complex> sequenceValues = null;
-			GenericSignal signalTemp = null;
-			
-			for(int i=1; i<13; i++){
-				path = "/Users/luke1993/Documents"
-						+ "/workspace/Homework1_Motta_Tucci/sequenze/output_"+i+".dat";
-				sequenceValues = lettoreNumeriComplessi.execute(path);
-				signalTemp = new GenericSignal(sequenceValues);
-				System.out.println(evaluatorSignal.calculateSNR(signalTemp));
-			}
-			
-		}catch(Exception e){
-			System.out.println("Impossibile leggere segnale da file");
-		}
-
 	}
 }

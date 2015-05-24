@@ -66,8 +66,10 @@ public class Complex {
 	
 	
 	public Complex div(Complex that){
-		double parteRe = (this.getParteReale()*that.getParteReale() + this.getParteImmaginaria()*that.getParteImmaginaria()) / (Math.pow(that.getParteReale(), 2) + Math.pow(that.getParteImmaginaria(), 2));
-		double parteImm = (this.getParteImmaginaria()*that.getParteReale() - this.getParteReale()*that.getParteImmaginaria()) / (Math.pow(that.getParteReale(), 2) + Math.pow(that.getParteImmaginaria(), 2));
+		double parteRe = (this.getParteReale() * that.getParteReale() + this.getParteImmaginaria()*that.getParteImmaginaria()) / 
+				(Math.pow(that.getParteReale(), 2) + Math.pow(that.getParteImmaginaria(), 2));
+		double parteImm = (this.getParteImmaginaria()*that.getParteReale() - this.getParteReale()*that.getParteImmaginaria()) / 
+				(Math.pow(that.getParteReale(), 2) + Math.pow(that.getParteImmaginaria(), 2));
 		
 		return new Complex(parteRe, parteImm);
 	}

@@ -14,7 +14,6 @@ import java.util.List;
 
 public abstract class AbstractSignal {
 	
-//	private int length;
 	private List<Complex> values;
 	
 	public AbstractSignal(){
